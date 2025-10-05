@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BypassHub Bookmarklets - Useful JavaScript bookmarklets for productivity and web utilities">
+<title>Bookmarklets - BypassHub</title>
+<style>
+    /* Import Google Font for modern typography with optimized loading */
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        background: 
+            radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 40% 80%, rgba(192, 132, 252, 0.06) 0%, transparent 70%),
+            linear-gradient(135deg, #0a0a0a 0%, #1a0d2e 50%, #16213e 100%);
+        font-family: 'Orbitron', monospace;
+        color: #ffffff;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow-x: hidden;
+    }
+    
+    .container {
+        text-align: center;
+        max-width: 900px;
+        padding: 40px 20px;
+        backdrop-filter: blur(15px);
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 25px;
+        border: 1px solid rgba(139, 92, 246, 0.2);
+        box-shadow: 
+            0 25px 50px rgba(0, 0, 0, 0.4),
+            0 0 30px rgba(139, 92, 246, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        animation: slideUp 1s ease-out;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(50px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    h1 {
+        font-size: 3rem;
+        font-weight: 900;
+        background: linear-gradient(45deg, #8b5cf6, #a855f7, #c084fc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 15px;
+        text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+        color: #b8b8b8;
+        margin-bottom: 30px;
+        opacity: 0.8;
+    }
+    
+    .back-btn {
+        background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+        color: #e5e7eb;
+        border: 1px solid rgba(139, 92, 246, 0.3);
+        padding: 12px 24px;
+        border-radius: 12px;
+        font-family: 'Orbitron', monospace;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        margin-bottom: 30px;
+    }
+    
+    .back-btn:hover {
+        background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
+        border-color: #8b5cf6;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(139, 92, 246, 0.3);
+    }
+    
+    .reference-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin: 25px 0;
+        text-align: left;
+    }
+    
+    .reference-card {
+        background: rgba(139, 92, 246, 0.08);
+        border: 1px solid rgba(139, 92, 246, 0.2);
+        border-radius: 12px;
+        padding: 20px;
+        transition: all 0.3s ease;
+    }
+    
+    .reference-card:hover {
+        background: rgba(139, 92, 246, 0.12);
+        border-color: rgba(139, 92, 246, 0.3);
+        transform: translateY(-2px);
+    }
+    
+    .reference-card h4 {
+        color: #c084fc;
+        margin: 0 0 15px 0;
+        font-size: 1.1rem;
+    }
+    
+    .code-block {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(139, 92, 246, 0.3);
+        border-radius: 8px;
+        padding: 12px;
+        margin: 10px 0;
+        text-align: center;
+    }
+    
+    .code-block p {
+        color: #d1d5db;
+        font-size: 0.9rem;
+        margin: 10px 0 0 0;
+        font-family: 'Orbitron', sans-serif;
+    }
+    
+    .bookmarklet-link {
+        display: inline-block;
+        background: linear-gradient(135deg, #8b5cf6, #a855f7);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        margin: 8px 0;
+    }
+    
+    .bookmarklet-link:hover {
+        background: linear-gradient(135deg, #a855f7, #c084fc);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+    }
+    
+    .info-section {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 25px;
+        border-radius: 15px;
+        border: 1px solid rgba(139, 92, 246, 0.2);
+        margin: 30px 0;
+        text-align: left;
+    }
+    
+    .info-section h2 {
+        color: #c084fc;
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    
+    .info-section p, .info-section ol {
+        color: #e5e7eb;
+        line-height: 1.6;
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+    
+    .info-section ol {
+        padding-left: 25px;
+    }
+    
+    .info-section li {
+        margin-bottom: 10px;
+    }
+    
+    .info-section strong {
+        color: #c084fc;
+        font-weight: 600;
+    }
+    
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+        h1 { font-size: 2.5rem; }
+        .container { 
+            margin: 15px; 
+            padding: 25px 15px;
+        }
+        .reference-grid { 
+            grid-template-columns: 1fr; 
+            gap: 15px; 
+        }
+        .reference-card {
+            padding: 15px;
+        }
+        .back-btn {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+    }
+</style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="https://voidvsd.github.io/bypasshub" class="back-btn">← Back to BypassHub</a>
+        
+        <h1>📋 Bookmarklets</h1>
+        <p class="subtitle">Drag these links to your bookmarks bar for one-click functionality</p>
+        
+        <div class="reference-grid">
+            <div class="reference-card">
+                <h4>🎭 Universal Tab Cloak</h4>
+                <div class="code-block">
+                    <a href="javascript:(function(){document.title=prompt('Tab Cloak - Enter new Tab Title:');var icon=document.querySelector('link[rel=icon]')||document.createElement('link');icon.rel='icon';switch(prompt('Choose new tab icon: 1=Google Search, 2=Google Drive, 3=Custom URL')){case '1':icon.href='https://www.google.com/favicon.ico';break;case '2':icon.href='https://ssl.gstatic.com/images/branding/product/2x/hh_drive_96dp.png';break;case '3':icon.href=prompt('Enter Custom Tab Icon URL:')||'https://www.google.com/favicon.ico';break;default:return;}if(!document.querySelector('link[rel=icon]'))document.head.appendChild(icon);})();" class="bookmarklet-link">Tab Cloak</a>
+                    <p>Interactive tab cloaking - choose custom title and icon</p>
+                </div>
+            </div>
+            
+            <div class="reference-card">
+                <h4>🌊 History Flood</h4>
+                <div class="code-block">
+                    <a href="javascript:(function(){var num=parseInt(prompt('History flood amount (1-50):'))||10;if(num>50)num=50;var x=window.location.href;for(var i=1;i<=num;i++){history.pushState(null,null,i==num?x:Math.random().toString())}alert('History flooded with '+num+' entries!')})();" class="bookmarklet-link">Flood History</a>
+                    <p>Floods browser history to hide visited sites</p>
+                </div>
+            </div>
+            
+            <div class="reference-card">
+                <h4>🚀 Proxy Launcher</h4>
+                <div class="code-block">
+                    <a href="javascript:(function(){var urls=['https://view.xiayu7.cn/','https://mathsubjeftvrebagreements.corporaciontolerancia.cl/','https://huawaakiskokoa.duckdns.org/'];var url=urls[Math.floor(Math.random()*urls.length)];var win=window.open('','_blank','width=1200,height=800');var doc=win.document;doc.open();doc.write('<iframe src='+url+' style=position:fixed;width:100vw;height:100vh;top:0;left:0;border:none;></iframe>');doc.close();})();" class="bookmarklet-link">Launch Proxy</a>
+                    <p>Opens a random working proxy site in a new window</p>
+                </div>
+            </div>
+            
+            <div class="reference-card">
+                <h4>🎮 Panic Button</h4>
+                <div class="code-block">
+                    <a href="javascript:window.location.href='https://classroom.google.com';" class="bookmarklet-link">Quick Escape</a>
+                    <p>Instantly redirects to Google Classroom for emergency situations</p>
+                </div>
+            </div>
+            
+            <div class="reference-card">
+                <h4>🔍 Password Revealer</h4>
+                <div class="code-block">
+                    <a href="javascript:(function(){var p=document.querySelectorAll('input[type=\"password\"]');for(var i=0;i<p.length;i++){p[i].type='text';}})();" class="bookmarklet-link">Show Passwords</a>
+                    <p>Reveals hidden password fields as plain text</p>
+                </div>
+            </div>
+            
+            <div class="reference-card">
+                <h4>📝 Edit Page</h4>
+                <div class="code-block">
+                    <a href="javascript:document.body.contentEditable='true';document.designMode='on';alert('You can now edit this page!');" class="bookmarklet-link">Make Page Editable</a>
+                    <p>Makes the entire page editable so you can modify text</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <h2>📖 How to Use</h2>
+            <ol>
+                <li><strong>Drag to Bookmarks:</strong> Drag any bookmarklet link to your browser's bookmarks bar</li>
+                <li><strong>One-Click Use:</strong> Click the bookmark while on any webpage to run the script</li>
+                <li><strong>Works Everywhere:</strong> These work on any website in any modern browser</li>
+                <li><strong>Safe & Private:</strong> All code runs locally in your browser - nothing is sent to external servers</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>
